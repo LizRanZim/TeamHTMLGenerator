@@ -56,7 +56,7 @@ function init() {
     .prompt(teamManagerquestions)
     
     // if choice of who do you want to add for the last question ==== engineer prompt engineer questions then return to the menu, else if choice === intern then return to the menu, else if choice is finished go to generate markdown. Somehow need an inquirer menu that you can return to.
-    .prompt (menuQuestions)
+    // .prompt (menuQuestions)
 
     .then((response) => {
         const generateHTMLfile = generateHTML(response);
