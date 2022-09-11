@@ -9,63 +9,131 @@ const Manager = require('./lib/manager')
 const Engineer = require('./lib/engineer')
 
 
-// const manager1 = managerData
+const responseData = {}
 
 
-// TODO: Create an array of questions for user input
+
+// array of questions for user input
+// could dynamically generate array below based on user input?
 const teamManagerquestions = [
     {
         type: 'list',
-        message: 'What role do you want to enter data for?',
-        name: 'role',
+        message: 'You will be entering data for the manager, please select Manager below.',
+        name: 'managerRole',
         choices: ['Manager', 'Engineer', 'Intern'],
 
     },
 
     {
         type: 'input',
-        message: 'What is the name of this person?',
-        name: 'name',
+        message: 'What is the name of the manager?',
+        name: 'managerName',
 
     },
 
     {
         type: 'input',
-        message: 'What is the id of this person?',
-        name: 'id',
+        message: 'What is the id of the manager?',
+        name: 'managerId',
 
     },
     {
         type: 'input',
-        message: 'What is the email address of this person?',
-        name: 'email',
+        message: 'What is the email address of the manager?',
+        name: 'managerEmail',
     },
     {
         type: 'input',
-        message: 'What is the office number of this person?',
+        message: 'What is the office number of this manager?',
         name: 'officeNumber',
-        when: (response) => response.role === 'Manager'
+        when: (response) => response.managerRole === 'Manager'
     },
+    // end manager questions
+    
+    // start engineer questions
     {
-        type: 'input',
-        message: 'What is the school of this person?',
-        name: 'school',
-        when: (response) => response.role === 'Intern'
-    },
-    {
-        type: 'input',
-        message: 'What is the gitHub username of this person?',
-        name: 'github',
-        when: (response) => response.role === 'Engineer'
+        type: 'list',
+        message: 'You will be entering data for the engineer, please select Engineer below.',
+        name: 'engineerRole',
+        choices: ['Manager', 'Engineer', 'Intern'],
+
     },
 
+    {
+        type: 'input',
+        message: 'What is the name of the engineer?',
+        name: 'engineerName',
+
+    },
+
+    {
+        type: 'input',
+        message: 'What is the id of the engineer?',
+        name: 'engineerId',
+
+    },
+
+    {
+        type: 'input',
+        message: 'What is the email of the engineer?',
+        name: 'engineerEmail',
+
+    },
+
+    {
+        type: 'input',
+        message: 'What is the gitHub username of the engineer?',
+        name: 'github',
+        when: (response) => response.engineerRole === 'Engineer'
+    },
+    
+// end engineer questions
+// start intern questions
+
+    {
+        type: 'list',
+        message: 'You will be entering data for the intern, please select Intern below.',
+        name: 'internRole',
+        choices: ['Manager', 'Engineer', 'Intern'],
+
+    },
+
+    {
+        type: 'input',
+        message: 'What is the name of the intern?',
+        name: 'internName',
+
+    },
+
+    {
+        type: 'input',
+        message: 'What is the id of the intern?',
+        name: 'internId',
+
+    },
+
+    {
+        type: 'input',
+        message: 'What is the email of the intern?',
+        name: 'internEmail',
+
+    },
+
+    {
+        type: 'input',
+        message: 'What is the school of the intern?',
+        name: 'school',
+        when: (response) => response.internRole === 'Intern'
+    },
+   
+// end intern questions
 
 ];
 
 
 
 
-// function to write README file
+// function to write html file
 function writeToFile(fileName, data) {
     // use fs to write a markdown file
     fs.writeFile(fileName, data, function (err) {
@@ -73,47 +141,45 @@ function writeToFile(fileName, data) {
     });
 }
 
+// function to prep to write the html file after all questions are answered
+
+function prepHTMLFile(responseData) {
+
+    const generateHTMLfile = generateHTML(responseData);
+
+    console.log(generateHTMLfile);
+    console.log(responseData, "Manager data")
 
 
-
-
-
-// TODO: Create a function to initialize app
-function init() {
-    inquirer
-        .prompt(teamManagerquestions)
-       
-        .then((response) => {
-
-            // add code to store responses in array
-
-            // put below in a separate function
-            const generateHTMLfile = generateHTML(response);
-
-            // Console logs the html
-            console.log(generateHTMLfile);
-
-// store responses to questions in an array
-function storeResponses() {
-
-    if (response.role === 'Manager') {
-
-        let managerData = [response.name, response.id, response.email, response.officeNumber];
-
-        console.log(managerData);
-
-    }
-
+    writeToFile('index.html', generateHTMLfile);
     return
 }
 
-            storeResponses();
-            writeToFile('index.html', generateHTMLfile);
-            
-        });
 
+
+// TODO: initializes app, and stores answers in array
+function init() {
+    inquirer
+        .prompt(teamManagerquestions)
+
+        .then((response) => {
+            if (response.managerRole === 'Manager') {
+                responseData.push = response
+                console.log(responseData, "Response Data")
+            }
+
+            prepHTMLFile(responseData);
+   });
+
+  
+   
+   
 };
+
 
 // Function call to initialize app
 init();
+
+
+
 
