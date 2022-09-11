@@ -1,4 +1,6 @@
 // Generates HTML from manager responses
+
+
 function generateHTML(response) {
 
     let htmlTemplate = "<!DOCTYPE html>" +
@@ -14,10 +16,10 @@ function generateHTML(response) {
 
     let cardCode = `<div class="card" style="width: 18rem;"><div class="card-body"><h1 class="card-title">`
     let role = `${response.role} \n`
-    let name1 =   `${response.name}</h1>`;
+    let name1 = `${response.name}</h1>`;
     let id = `<h2>Id# ${response.id}</h2>`;
     let email = `<h2>Email: ${response.email}</h2>`;
-   
+
     let officeNumber = `<h2>Office: ${response.officeNumber}</h2>`;
 
     htmlTemplate += cardCode;
@@ -29,16 +31,24 @@ function generateHTML(response) {
         htmlTemplate += officeNumber;
     }
     else {
-        htmlTemplate += "</div></div></div></div></body></html>"; 
+        htmlTemplate += "</div></div></div></div></body></html>";
     }
 
     let completeTemplate = htmlTemplate;
 
 
     console.log(htmlTemplate);
-    return completeTemplate
-        ;
+    
+    return completeTemplate;
+        
+;}
+
+// do separate functions to collate the code stored in the variables into html
+function generateManager (response) {
+
+
 }
+
 
 
 
