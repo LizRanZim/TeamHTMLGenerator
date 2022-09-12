@@ -36,7 +36,7 @@ function generateHTML(responseData) {
     let id2 = `<h2>Id# ${responseData.push.engineerId}</h2>`;
     let email2 = `<h2>Email: ${responseData.push.engineerEmail}</h2>`;
 
-    let github2 = `<h2>Office: ${responseData.push.github}</h2>`;
+    let github2 = `<h2>Github: ${responseData.push.github}</h2>`;
 
     // intern card code
     let name3 = `<h1>${responseData.push.internName}</h1>`;
@@ -44,7 +44,7 @@ function generateHTML(responseData) {
     let id3 = `<h2>Id# ${responseData.push.internId}</h2>`;
     let email3 = `<h2>Email: ${responseData.push.internEmail}</h2>`;
 
-    let school3 = `<h2>Office: ${responseData.push.school}</h2>`;
+    let school3 = `<h2>School: ${responseData.push.school}</h2>`;
 
 
     // Build html template
@@ -54,8 +54,9 @@ function generateHTML(responseData) {
     htmlTemplate += name1;
     htmlTemplate += id1;
     htmlTemplate += email1;
-    if (responseData.push.role === 'Manager') {
-        htmlTemplate += officeNumber1;
+
+    // not being added >>
+    if (responseData.push.managerRole === 'Manager') {htmlTemplate += officeNumber1;
     };
     htmlTemplate += endCardCode;
 
@@ -65,7 +66,8 @@ function generateHTML(responseData) {
     htmlTemplate += id2;
     htmlTemplate += email2;
 
-    if (responseData.push.role === 'Engineer') { htmlTemplate += github2; };
+    // not being added >>
+    if (responseData.push.engineerRole === 'Engineer') {htmlTemplate += github2; };
 
     htmlTemplate += endCardCode;
 
@@ -75,7 +77,8 @@ function generateHTML(responseData) {
     htmlTemplate += id3;
     htmlTemplate += email3;
 
-    if (responseData.push.role === 'Intern') { htmlTemplate += school3 }
+    // not being added >>
+    if (responseData.push.internRole === 'Intern') {htmlTemplate += school3 }
 
     htmlTemplate += endCardCode;
     htmlTemplate += endHTMLTemplate;
