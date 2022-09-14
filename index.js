@@ -43,7 +43,7 @@ function createTeam() {
                 createIntern();
             }
             else             {
-                prepHTMLFile();
+                prepHTMLFile(teamArray);
                
             };
         })
@@ -90,9 +90,10 @@ function createManager() {
                 response.managerId,
                 response.managerEmail,
                 response.managerOfficeNumber,
+                role = 'Manager'
             )
             teamArray.push(manager);
-            console.log(teamArray);
+            console.log(teamArray, "manager function");
 
             createTeam();
             
@@ -137,9 +138,10 @@ function createIntern() {
                 response.internId,
                 response.internEmail,
                 response.internSchool,
+                role = 'Intern'
             )
             teamArray.push(intern);
-            console.log(teamArray);
+            console.log(teamArray, "intern function");
             createTeam();          
         })
 
@@ -180,9 +182,10 @@ function createEngineer() {
                 response.engineerId,
                 response.engineerEmail,
                 response.engineerGithub,
+                role = 'Engineer'
             )
             teamArray.push(engineer);
-            console.log(teamArray);
+            console.log(teamArray, "engineer function");
             createTeam();
         })
 
