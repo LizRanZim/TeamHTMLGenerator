@@ -6,134 +6,194 @@ const generateHTML = require('./src/generateHTML');
 const Employee = require('./lib/employee')
 const Intern = require('./lib/intern')
 const Manager = require('./lib/manager')
-const Engineer = require('./lib/engineer')
+const Engineer = require('./lib/engineer');
+// const { create } = require('domain');
 
 
-const responseData = {}
+const teamArray = []
 
 
+// Overall function to initialize app 
 
-// array of questions for user input
-// could dynamically generate array below based on user input?
-const teamManagerquestions = [
-    {
-        type: 'list',
-        message: 'You will be entering data for the manager, please select Manager below.',
-        name: 'managerRole',
-        choices: ['Manager', 'Engineer', 'Intern'],
+function init() {
+    createManager();
+}
 
-    },
 
-    {
-        type: 'input',
-        message: 'What is the name of the manager?',
-        name: 'managerName',
+// Main manager > create manager
 
-    },
+function createTeam() {
 
-    {
-        type: 'input',
-        message: 'What is the id of the manager?',
-        name: 'managerId',
+    inquirer.prompt([
+        {
+            type: 'list',
+            message: 'What type of employee do you want to add',
+            choices: ['Engineer', 'Intern', 'No further employees to add'],
+            name: 'employeeRole'
 
-    },
-    {
-        type: 'input',
-        message: 'What is the email address of the manager?',
-        name: 'managerEmail',
-    },
-    {
-        type: 'input',
-        message: 'What is the office number of this manager?',
-        name: 'officeNumber',
-        when: (response) => response.managerRole === 'Manager'
-    },
-    // end manager questions
-    
-    // start engineer questions
-    {
-        type: 'list',
-        message: 'You will be entering data for the engineer, please select Engineer below.',
-        name: 'engineerRole',
-        choices: ['Manager', 'Engineer', 'Intern'],
+        },
 
-    },
+    ])
 
-    {
-        type: 'input',
-        message: 'What is the name of the engineer?',
-        name: 'engineerName',
+        .then((response) => {
+            if (response.employeeRole === 'Engineer') {
+                createEngineer();
 
-    },
-
-    {
-        type: 'input',
-        message: 'What is the id of the engineer?',
-        name: 'engineerId',
-
-    },
-
-    {
-        type: 'input',
-        message: 'What is the email of the engineer?',
-        name: 'engineerEmail',
-
-    },
-
-    {
-        type: 'input',
-        message: 'What is the gitHub username of the engineer?',
-        name: 'github',
-        when: (response) => response.engineerRole === 'Engineer'
-    },
-    
-// end engineer questions
-// start intern questions
-
-    {
-        type: 'list',
-        message: 'You will be entering data for the intern, please select Intern below.',
-        name: 'internRole',
-        choices: ['Manager', 'Engineer', 'Intern'],
-
-    },
-
-    {
-        type: 'input',
-        message: 'What is the name of the intern?',
-        name: 'internName',
-
-    },
-
-    {
-        type: 'input',
-        message: 'What is the id of the intern?',
-        name: 'internId',
-
-    },
-
-    {
-        type: 'input',
-        message: 'What is the email of the intern?',
-        name: 'internEmail',
-
-    },
-
-    {
-        type: 'input',
-        message: 'What is the school of the intern?',
-        name: 'school',
-        when: (response) => response.internRole === 'Intern'
-    },
-   
-// end intern questions
-
-];
+            } else if (response.employeeRole === 'Intern') {
+                createIntern();
+            }
+            else             {
+                prepHTMLFile();
+               
+            };
+        })
 
 
 
+}
 
-// function to write html file
+
+function createManager() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the team manager?',
+            name: 'managerName',
+
+        },
+
+        {
+            type: 'input',
+            message: 'What is the id of the team manager?',
+            name: 'managerId',
+
+        },
+        {
+            type: 'input',
+            message: 'What is the email of the team manager?',
+            name: 'managerEmail',
+
+        },
+        {
+            type: 'input',
+            message: 'What is the office number of the team manager',
+            name: 'managerOfficeNumber',
+
+        },
+
+    ])
+
+        .then((response) => {
+            const manager = new Manager(
+                response.managerName,
+                response.managerId,
+                response.managerEmail,
+                response.managerOfficeNumber,
+            )
+            teamArray.push(manager);
+            console.log(teamArray);
+
+            createTeam();
+            
+        })
+
+}
+
+function createIntern() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the intern?',
+            name: 'internName',
+
+        },
+
+        {
+            type: 'input',
+            message: 'What is the id of the intern?',
+            name: 'internId',
+
+        },
+        {
+            type: 'input',
+            message: 'What is the email of the intern?',
+            name: 'internEmail',
+
+        },
+        {
+            type: 'input',
+            message: 'What is the school of the intern',
+            name: 'internSchool',
+
+        },
+
+    ])
+
+        .then((response) => {
+            const intern = new Intern(
+                response.internName,
+                response.internId,
+                response.internEmail,
+                response.internSchool,
+            )
+            teamArray.push(intern);
+            console.log(teamArray);
+            createTeam();          
+        })
+
+}
+
+function createEngineer() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            message: 'What is the name of the engineer?',
+            name: 'engineerName',
+        },
+        {
+            type: 'input',
+            message: 'What is the id of the engineer?',
+            name: 'engineerId',
+
+        },
+        {
+            type: 'input',
+            message: 'What is the email of the engineer?',
+            name: 'engineerEmail',
+
+        },
+        {
+            type: 'input',
+            message: 'What is the gitHub id of the engineer',
+            name: 'engineerGithub',
+
+        },
+
+    ])
+
+        .then((response) => {
+            const engineer = new Engineer(
+                response.engineerName,
+                response.engineerId,
+                response.engineerEmail,
+                response.engineerGithub,
+            )
+            teamArray.push(engineer);
+            console.log(teamArray);
+            createTeam();
+        })
+
+}
+
+
+
+
+
+
+// Keep this > function to write html file
 function writeToFile(fileName, data) {
     // use fs to write a markdown file
     fs.writeFile(fileName, data, function (err) {
@@ -141,45 +201,23 @@ function writeToFile(fileName, data) {
     });
 }
 
-// function to prep to write the html file after all questions are answered
+// Keep this > function to prep to write the html file after all questions are answered
 
-function prepHTMLFile(responseData) {
+function prepHTMLFile(teamArray) {
 
-    const generateHTMLfile = generateHTML(responseData);
+    const generateHTMLfile = generateHTML(teamArray);
 
     console.log(generateHTMLfile);
-    console.log(responseData, "Manager data")
+    console.log(teamArray, "Manager data")
 
 
     writeToFile('index.html', generateHTMLfile);
-    return
+    
 }
 
 
 
-// TODO: initializes app, and stores answers in array
-function init() {
-    inquirer
-        .prompt(teamManagerquestions)
-
-        .then((response) => {
-            if (response.managerRole === 'Manager') {
-                responseData.push = response
-                console.log(responseData, "Response Data")
-            }
-
-            prepHTMLFile(responseData);
-   });
-
-  
-   
-   
-};
 
 
-// Function call to initialize app
 init();
-
-
-
 

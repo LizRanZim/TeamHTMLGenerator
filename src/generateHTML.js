@@ -1,8 +1,21 @@
 // Generates HTML from manager responses
 
+// decides which class to use
 
-function generateHTML(responseData) {
-    console.log(responseData, "logging from generateHTML")
+
+// for loop
+
+function loopArray () {
+    const builtArray = []
+
+    for (let i = 0; i < teamArray.length; i++) {
+        const cardCode = `<h1>${teamArray[i].name}</h1><h2>${teamArray[i].role}</h2><h2>Id: ${teamArray[i].id}</h2> <h2>Email: ${teamArray[i].email}</h2><h2>Email: ${teamArray[i].email}</h2>`;
+        
+    }
+}
+
+function generateHTML(teamArray) {
+    console.log(teamArray, "logging from generateHTML")
 
     let htmlTemplate = "<!DOCTYPE html>" +
         "<html lang=\"en\">" +
@@ -22,29 +35,30 @@ function generateHTML(responseData) {
 
     let endHTMLTemplate = `</div></div></body></html>`
 
+    // for loop to loop
 
-    let name1 = `<h1>${responseData.push.managerName}</h1>`;
-    let role1 = `<h1>${responseData.push.managerRole}</h1>`
-    let id1 = `<h2>Id# ${responseData.push.managerId}</h2>`;
-    let email1 = `<h2>Email: ${responseData.push.managerEmail}</h2>`;
+    let name1 = `<h1>${teamArray.managerName}</h1>`;
+    let role1 = `<h1>${teamArray.managerRole}</h1>`
+    let id1 = `<h2>Id# ${teamArray.managerId}</h2>`;
+    let email1 = `<h2>Email: ${teamArray.managerEmail}</h2>`;
 
-    let officeNumber1 = `<h2>Office: ${responseData.push.officeNumber}</h2>`;
+    let officeNumber1 = `<h2>Office: ${teamArray.officeNumber}</h2>`;
 
     // engineer card code
-    let name2 = `<h1>${responseData.push.engineerName}</h1>`;
-    let role2 = `<h1>${responseData.push.engineerRole}</h1>`
-    let id2 = `<h2>Id# ${responseData.push.engineerId}</h2>`;
-    let email2 = `<h2>Email: ${responseData.push.engineerEmail}</h2>`;
+    let name2 = `<h1>${teamArray.engineerName}</h1>`;
+    let role2 = `<h1>${teamArray.engineerRole}</h1>`
+    let id2 = `<h2>Id# ${teamArray.engineerId}</h2>`;
+    let email2 = `<h2>Email: ${teamArray.engineerEmail}</h2>`;
 
-    let github2 = `<h2>Github: ${responseData.push.github}</h2>`;
+    let github2 = `<h2>Github: ${teamArray.github}</h2>`;
 
     // intern card code
-    let name3 = `<h1>${responseData.push.internName}</h1>`;
-    let role3 = `<h1>${responseData.push.internRole}</h1>`
-    let id3 = `<h2>Id# ${responseData.push.internId}</h2>`;
-    let email3 = `<h2>Email: ${responseData.push.internEmail}</h2>`;
+    let name3 = `<h1>${teamArray.internName}</h1>`;
+    let role3 = `<h1>${teamArray.internRole}</h1>`
+    let id3 = `<h2>Id# ${teamArray.internId}</h2>`;
+    let email3 = `<h2>Email: ${teamArray.internEmail}</h2>`;
 
-    let school3 = `<h2>School: ${responseData.push.school}</h2>`;
+    let school3 = `<h2>School: ${teamArray.school}</h2>`;
 
 
     // Build html template
@@ -56,7 +70,7 @@ function generateHTML(responseData) {
     htmlTemplate += email1;
 
     // not being added >>
-    if (responseData.push.managerRole === 'Manager') {htmlTemplate += officeNumber1;
+    if (teamArray.managerRole === 'Manager') {htmlTemplate += officeNumber1;
     };
     htmlTemplate += endCardCode;
 
@@ -67,7 +81,7 @@ function generateHTML(responseData) {
     htmlTemplate += email2;
 
     // not being added >>
-    if (responseData.push.engineerRole === 'Engineer') {htmlTemplate += github2; };
+    if (teamArray.engineerRole === 'Engineer') {htmlTemplate += github2; };
 
     htmlTemplate += endCardCode;
 
@@ -78,7 +92,7 @@ function generateHTML(responseData) {
     htmlTemplate += email3;
 
     // not being added >>
-    if (responseData.push.internRole === 'Intern') {htmlTemplate += school3 }
+    if (teamArray.internRole === 'Intern') {htmlTemplate += school3 }
 
     htmlTemplate += endCardCode;
     htmlTemplate += endHTMLTemplate;
