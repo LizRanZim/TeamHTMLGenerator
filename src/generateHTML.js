@@ -1,7 +1,5 @@
 // Generates HTML from manager responses
 
-// decides which class to use
-
 
 // for loop
 
@@ -28,7 +26,7 @@ function generateHTML(teamArray) {
     let endHTMLTemplate = `</div></div></body></html>`
 
     // variable for github url for if/else statement
-    let githubUrl = `<a href =https://github.com/` + teamArray[i].github + `</a>`
+
 
     // for loop to place data in html
     const builtArray = []
@@ -37,7 +35,7 @@ function generateHTML(teamArray) {
 
 
         for (let i = 0; i < teamArray.length; i++) {
-            const infoCardcode = startCardCode + `<h1  class="text-primary">${teamArray[i].name}</h1><h2> ${teamArray[i].role}</h2><h2>Id: ${teamArray[i].id}</h2> <h2 class ="text-danger">Email: ${teamArray[i].email}</h2><h2>${teamArray[i].officeNumber || teamArray[i].school || teamArray[i].github}</h2>` + endCardCode;
+            const infoCardcode = startCardCode + `<h1  class="text-primary">${teamArray[i].name}</h1><h2> ${teamArray[i].role}</h2><h2>Id: ${teamArray[i].id}</h2> <h2 class ="text-danger">Email: <a href = "mailto: ${teamArray[i].email}">${teamArray[i].email}</a></h2><h2>${teamArray[i].officeNumber || teamArray[i].school || teamArray[i].github}</h2 >` + endCardCode;
 
             builtArray.push(infoCardcode);
             console.log(infoCardcode);
@@ -46,6 +44,7 @@ function generateHTML(teamArray) {
 
     loopArray();
 
+    // how to get github into a url syntax? <a href="https://github.com/teamArray[i].github">teamArray[i].github</a>??? It errors when i add to for loop
 
     // Build html template
 
