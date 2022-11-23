@@ -2,7 +2,7 @@
 
 The name of the application is TeamHTMLGenerator.
 
-The application is a Team Roster HTML file generator based on user inputs for team members includuing manager, engineer and intern. 
+The application is a Team Roster HTML file generator based on user inputs for team members including manager, engineer and intern. 
 
 This a command line application.
 
